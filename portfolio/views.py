@@ -6,7 +6,7 @@ from rest_framework.permissions import AllowAny, IsAdminUser, IsAuthenticated
 from rest_framework.status import HTTP_200_OK
 from rest_framework.response import Response
 from .models import Contact, Work
-from django.core.mail import EmailMessage, send_mass_mail
+from django.core.mail import EmailMessage, send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
 # Create your views here.
@@ -37,9 +37,10 @@ class ContactView(APIView):
         message = EmailMessage( 'We have a new contact mail', send_to_ruth, "contact@ruthikegah.com", ["contact@ruthikegah.com"])
         message_receiver = EmailMessage( 'Thank you for contacting me', sent_to_contact, "contact@ruthikegah.com", [email])
         message.content_subtype = 'html'
-        message.send()
         message_receiver.content_subtype = 'html'
         message_receiver.send()
+
+        message.send()
         contact.save()
         return Response({"message":"Message sent successfully"},status=HTTP_200_OK)
 

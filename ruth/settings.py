@@ -34,14 +34,14 @@ INSTALLED_APPS = [
     'corsheaders',
     'portfolio',
     'drf_yasg',
-    'rest_framework',
+  'rest_framework',
     'rest_framework.authtoken',
     'dj_rest_auth',
     'dj_rest_auth.registration',
-
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+  "anymail",
 
 ]
 
@@ -172,14 +172,20 @@ CORS_ALLOWED_ORIGINS = [
 
 
 ]
-ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+# ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.zoho.com'
+# EMAIL_HOST_USER = 'contact@ruthikegah.com'
+# EMAIL_HOST_PASSWORD = 'Amezhiruth2'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
+ANYMAIL = {
 
-EMAIL_HOST = 'smtp.zoho.com'
-EMAIL_HOST_USER = 'contact@ruthikegah.com'
-EMAIL_HOST_PASSWORD = 'Amezhiruth2'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
+    "RESEND_API_KEY": "re_3tMm8mUV_6L86ZQmmtLQxpyKfpUVaQ4LA",
+}
+# EMAIL_USE_SSL = False
+#
 DEFAULT_FROM_EMAIL = 'contact@ruthikegah.com'
 
 REST_FRAMEWORK = {
