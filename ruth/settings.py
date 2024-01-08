@@ -42,11 +42,12 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
   "anymail",
-
+ "whitenoise.runserver_nostatic",
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+      "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -96,7 +97,17 @@ DATABASES = {
 
     }
 }
+# DATABASES = {
+#     'default': {
+#      'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'PASSWORD': 'Amezhiruth20!',
+#         'PORT': '5432',
+#         'HOST': 'db.jqlwshhbenltlnemngmn.supabase.co'
 
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -106,6 +117,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+         'OPTIONS': {
+            'min_length': 5,
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -139,7 +153,17 @@ STATICFILES_DIRS = [
     # os.path.join(BASE_DIR, 'static')
 
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+STATIC_ROOT = BASE_DIR/ 'assets'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR/ 'media'
+
+# STORAGES = {
+
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
+# STATIC_HOST = "https://d4663kmspf1sqa.cloudfront.net"
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -172,13 +196,14 @@ CORS_ALLOWED_ORIGINS = [
 
 
 ]
-# ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = 'smtp.zoho.com'
 # EMAIL_HOST_USER = 'contact@ruthikegah.com'
 # EMAIL_HOST_PASSWORD = 'Amezhiruth2'
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
 ANYMAIL = {
 

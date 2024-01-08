@@ -11,6 +11,48 @@ from django.template.loader import render_to_string
 from django.conf import settings
 # Create your views here.
 
+class CreateWorkView(APIView):
+    permission_classes = (IsAdminUser,)
+    def post(self, request, *args,**kwargs):
+        values = request.data.get("title", None)
+        title= values['title']
+        description= values['description']
+        image= values['image']
+        Work(
+            title=title,
+            description=description,
+            image=image)
+        work.save()
+        return Response({"message":"Work created successfully"},status=HTTP_200_OK)
+
+class EditWorkView(APIView):
+    permission_classes = (IsAdminUser,)
+
+    def post(self, request, *args, **kwargs):
+        slug = kwargs.get('slug')
+        work = Work.objects.get(slug=slug)
+
+        # Get new values from request data
+        title = request.data.get('title', work.title)
+        description = request.data.get('description', work.description)
+        image = request.data.get('image', work.image)
+
+        # Update fields only if new values are different
+        if work.title != title:
+            work.title = title
+        if work.description != description:
+            work.description = description
+        if work.image != image:
+            work.image = image
+        work.save()
+        return Response({"message": "Work updated successfully"}, status=HTTP_200_OK)
+class ContactMeView(ListAPIView):
+    permission_classes=(AllowAny,)
+    serializer_class = ContactSerializer
+
+    def get_queryset(self):
+        return Contact.objects.all().order_by("-date")
+
 
 class ContactView(APIView):
     permission_classes = (AllowAny,)

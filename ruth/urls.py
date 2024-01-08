@@ -22,7 +22,9 @@ schema_view = get_schema_view(
 urlpatterns = [
         path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
         path('admin/', admin.site.urls),
-        path('api-auth/', include('rest_framework.urls')),
+        path('api-auth/', include('rest_framework.urls')),path('change-password/<uidb64>/<token>/',
+         TemplateView.as_view(template_name="password_reset_confirm.html"),
+         name='password_reset_confirm'),
         path('api/', include('portfolio.urls')),
         path('accounts/', include('allauth.urls')),
         path('rest-auth/', include('dj_rest_auth.urls')),

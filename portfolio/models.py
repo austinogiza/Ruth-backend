@@ -1,6 +1,7 @@
 from django.db import models
 from django_editorjs import EditorJsField
-
+from django.db.models.signals import post_save
+from django.utils.text import slugify
 LABELS =(
     ("Speaking", "Speaking"),
     ("Project", "Project")
@@ -33,14 +34,7 @@ class Work(models.Model):
         }
     )
     image = models.ImageField()
-    image_1 = models.URLField(blank=True, null=True)
-    image_2 = models.URLField(blank=True, null=True)
-    image_3 = models.URLField(blank=True, null=True)
-    image_4 = models.URLField(blank=True, null=True)
-    image_5 = models.URLField(blank=True, null=True)
-    image_6 = models.URLField(blank=True, null=True)
-    github_link = models.URLField(blank=True, null=True)
-    slug = models.SlugField(blank=False, null=True)
+    slug = models.SlugField(blank=False, null=True, unique=True)
     date = models.DateTimeField(auto_now_add=True,null=True,blank=True )
 
     def __str__(self):
@@ -48,3 +42,10 @@ class Work(models.Model):
 
     class Meta:
         unique_together = ['title', 'slug']
+
+def add_work_slug(self, instance, created, *args, **kwargs):
+    if created:
+        instance.slug = slugify(instance.title)
+        instance.save()
+
+post_save.connect(add_work_slug, sender=Work)
