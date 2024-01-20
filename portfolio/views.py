@@ -74,7 +74,7 @@ class ContactView(APIView):
             "email": email,
             "message": message
         }
-        send_to_ruth = render_to_string('received.html', context)
+        send_to_ruth = render_to_string('self.html', context)
         sent_to_contact = render_to_string('sent.html', context)
         message = EmailMessage( 'We have a new contact mail', send_to_ruth, "contact@ruthikegah.com", ["contact@ruthikegah.com"])
         message_receiver = EmailMessage( 'Thank you for contacting me', sent_to_contact, "contact@ruthikegah.com", [email])
