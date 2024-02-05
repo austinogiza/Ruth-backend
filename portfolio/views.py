@@ -76,12 +76,13 @@ class ContactView(APIView):
         }
         send_to_ruth = render_to_string('self.html', context)
         sent_to_contact = render_to_string('sent.html', context)
-        message = EmailMessage( 'We have a new contact mail', send_to_ruth, "contact@ruthikegah.com", ["contact@ruthikegah.com"])
+
         message_receiver = EmailMessage( 'Thank you for contacting me', sent_to_contact, "contact@ruthikegah.com", [email])
-        message.content_subtype = 'html'
+
         message_receiver.content_subtype = 'html'
         message_receiver.send()
-
+        message = EmailMessage('We have a new contact mail', send_to_ruth, "contact@ruthikegah.com", ["contact@ruthikegah.com"], )
+        message.content_subtype = 'html'
         message.send()
         contact.save()
         return Response({"message":"Message sent successfully"},status=HTTP_200_OK)
