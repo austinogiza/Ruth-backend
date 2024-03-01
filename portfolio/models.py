@@ -26,7 +26,7 @@ class Work(models.Model):
     label= models.CharField(choices=LABELS, blank=False, null=True, max_length=200)
     content = TipTapTextField()
     image = models.ImageField()
-    type=models.cha
+    type = models.CharField(max_length=200, blank=True, null=True)
     slug = models.SlugField(blank=False, null=True, unique=True)
     date = models.DateTimeField(auto_now_add=True,null=True,blank=True )
 
