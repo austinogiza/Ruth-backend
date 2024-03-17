@@ -81,18 +81,27 @@ WSGI_APPLICATION = 'ruth.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 ##development
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'ruth',
+#         'USER': 'postgres',
+#         'PASSWORD': 'austinforreal',
+#         'PORT': '5433',
+#         'HOST': 'localhost'
+
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'ruth',
-        'USER': 'postgres',
-        'PASSWORD': 'austinforreal',
-        'PORT': '5433',
-        'HOST': 'localhost'
-
+        'USER': 'ruth',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
-
 
 # DATABASES = {
 #     'default': {
