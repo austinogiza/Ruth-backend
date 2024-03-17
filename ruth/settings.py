@@ -38,6 +38,12 @@ INSTALLED_APPS = [
     "anymail",
     "whitenoise.runserver_nostatic",
     "django_tiptap",
+        'rest_framework.authtoken',
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
