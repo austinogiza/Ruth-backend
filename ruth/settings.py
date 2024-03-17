@@ -30,15 +30,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.postgres',
-    'django_editorjs',
     'django.contrib.sites',
     'corsheaders',
     'portfolio',
     'drf_yasg',
-  'rest_framework',
-  "anymail",
- "whitenoise.runserver_nostatic",
-  "django_tiptap",
+    'rest_framework',
+    "anymail",
+    "whitenoise.runserver_nostatic",
+    "django_tiptap",
 ]
 
 MIDDLEWARE = [
@@ -93,6 +92,8 @@ DATABASES = {
 
     }
 }
+
+
 # DATABASES = {
 #     'default': {
 #      'ENGINE': 'django.db.backends.postgresql',
@@ -140,28 +141,19 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-# ##developments
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
+##developments
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [
 
-    # os.path.join(BASE_DIR, 'static')
+#     # os.path.join(BASE_DIR, 'static')
 
-]
-STATIC_ROOT = BASE_DIR/ 'assets'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR/ 'media'
+# ]
+# STATIC_ROOT = BASE_DIR / "staticfiles"
+# STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# STORAGES = {
-
-#     "staticfiles": {
-#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-#     },
-# }
-# STATIC_HOST = "https://d4663kmspf1sqa.cloudfront.net"
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
+# CKEDITOR_UPLOAD_PATH = "uploads/"
 
 
 
@@ -175,6 +167,22 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+
+
+
+#production
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+  os.path.join(BASE_DIR, 'assets')
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 
