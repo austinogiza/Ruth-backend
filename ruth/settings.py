@@ -14,12 +14,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-1h@e+1z739!7!4x$1sftirie3m!es++i$2l84@5=d+gqlg*_ai'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True ## development
-DEBUG = False ## production
 
-#ALLOWED_HOSTS = [] ## development
 
-ALLOWED_HOSTS = ["www.api.ruthikegah.com", "api.ruthikegah.com"] ## production
+## development
+ALLOWED_HOSTS = []
+DEBUG = True
+## production
+#DEBUG = False ## production
+##ALLOWED_HOSTS = ["www.api.ruthikegah.com", "api.ruthikegah.com"]
 # Application definition
 
 INSTALLED_APPS = [
@@ -84,8 +86,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ruth.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 ##development
 # DATABASES = {
 #     'default': {
@@ -98,6 +98,8 @@ WSGI_APPLICATION = 'ruth.wsgi.application'
 
 #     }
 # }
+
+## production
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
