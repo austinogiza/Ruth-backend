@@ -17,11 +17,11 @@ SECRET_KEY = 'django-insecure-1h@e+1z739!7!4x$1sftirie3m!es++i$2l84@5=d+gqlg*_ai
 
 
 ## development
-ALLOWED_HOSTS = []
-DEBUG = True
+# ALLOWED_HOSTS = []
+# DEBUG = True
 ## production
-#DEBUG = False ## production
-##ALLOWED_HOSTS = ["www.api.ruthikegah.com", "api.ruthikegah.com"]
+DEBUG = False ## production
+ALLOWED_HOSTS = ["www.api.ruthikegah.com", "api.ruthikegah.com"]
 # Application definition
 
 INSTALLED_APPS = [
