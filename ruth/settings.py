@@ -1,8 +1,7 @@
 import os
-
-
 from pathlib import Path
-
+from dotenv import load_dotenv
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -11,17 +10,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1h@e+1z739!7!4x$1sftirie3m!es++i$2l84@5=d+gqlg*_ai'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
 ## development
-# ALLOWED_HOSTS = []
-# DEBUG = True
+ALLOWED_HOSTS = []
+DEBUG = True
 ## production
-DEBUG = False ## production
-ALLOWED_HOSTS = ["www.api.ruthikegah.com", "api.ruthikegah.com"]
+# DEBUG = False ## production
+# ALLOWED_HOSTS = ["www.api.ruthikegah.com", "api.ruthikegah.com"]
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,7 +39,7 @@ INSTALLED_APPS = [
     "anymail",
     "whitenoise.runserver_nostatic",
     "django_tiptap",
-        'rest_framework.authtoken',
+    'rest_framework.authtoken',
     'dj_rest_auth',
     'dj_rest_auth.registration',
     'allauth',
@@ -100,28 +99,29 @@ WSGI_APPLICATION = 'ruth.wsgi.application'
 # }
 
 ## production
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'ruth',
+#         'USER': 'ruth',
+#         'PASSWORD': 'ruth',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
+# DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'ruth',
-        'USER': 'ruth',
-        'PASSWORD': 'ruth',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'USER': 'postgres',
+        'PASSWORD': 'austinforreal',
+        'PORT': '5433',
+        'HOST': 'localhost'
+
     }
 }
-
-# DATABASES = {
-#     'default': {
-#      'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'postgres',
-#         'USER': 'postgres',
-#         'PASSWORD': 'Amezhiruth20!',
-#         'PORT': '5432',
-#         'HOST': 'db.jqlwshhbenltlnemngmn.supabase.co'
-
-#     }
-# }
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -223,7 +223,7 @@ ACCOUNT_UNIQUE_EMAIL = True
 EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
 ANYMAIL = {
 
-    "RESEND_API_KEY": "re_3tMm8mUV_6L86ZQmmtLQxpyKfpUVaQ4LA",
+    "RESEND_API_KEY": os.environ.get('RESEND_API_KEY'),
 }
 # EMAIL_USE_SSL = False
 #
