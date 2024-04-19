@@ -2,7 +2,6 @@ from django.db import models
 from django_editorjs import EditorJsField
 from django.db.models.signals import post_save
 from django.utils.text import slugify
-from django_tiptap.fields import TipTapTextField
 
 LABELS =(
     ("Speaking", "Speaking"),
@@ -24,7 +23,7 @@ class Contact(models.Model):
 class Work(models.Model):
     title = models.CharField(max_length=200)
     label= models.CharField(choices=LABELS, blank=False, null=True, max_length=200)
-    content = TipTapTextField()
+    content = models.TextField()
     image = models.ImageField()
     type = models.CharField(max_length=200, blank=True, null=True)
     slug = models.SlugField(blank=False, null=True, unique=True)

@@ -1,16 +1,19 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-load_dotenv()
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ruth.settings')
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
@@ -18,6 +21,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 ## development
 ALLOWED_HOSTS = []
 DEBUG = True
+
 ## production
 # DEBUG = False ## production
 # ALLOWED_HOSTS = ["www.api.ruthikegah.com", "api.ruthikegah.com"]
@@ -37,19 +41,13 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework',
     "anymail",
-    "whitenoise.runserver_nostatic",
     "django_tiptap",
     'rest_framework.authtoken',
-    'dj_rest_auth',
-    'dj_rest_auth.registration',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
+
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-      "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -57,19 +55,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
 ]
 
-AUTHENTICATION_BACKENDS = [
 
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
 ROOT_URLCONF = 'ruth.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-      'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -81,8 +74,8 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = 'ruth.wsgi.application'
+
 
 
 ##development
@@ -98,30 +91,19 @@ WSGI_APPLICATION = 'ruth.wsgi.application'
 #     }
 # }
 
-## production
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'ruth',
-#         'USER': 'ruth',
-#         'PASSWORD': 'ruth',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
 
-# DATABASES = {
+## production
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ruth',
-        'USER': 'postgres',
-        'PASSWORD': 'austinforreal',
-        'PORT': '5433',
-        'HOST': 'localhost'
-
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': os.getenv('SUPABASE_HOST'),
+        'NAME': 'postgres',
+        'USER': os.getenv('SUPABASE_USER'),
+        'PORT': '5432',
+        'PASSWORD': os.getenv('SUPABASE_PASSWORD'),
     }
 }
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -159,47 +141,30 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 ##developments
-# STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-
-#     # os.path.join(BASE_DIR, 'static')
-
-# ]
-# STATIC_ROOT = BASE_DIR / "staticfiles"
-# STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# CKEDITOR_UPLOAD_PATH = "uploads/"
-
-
-
-#production
-# STATIC_URL = '/static/'
-
-# STATICFILES_DIRS = [
-#   os.path.join(BASE_DIR, 'assets')
-# ]
-
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
-
-
-
-
-#production
 STATIC_URL = '/static/'
-
 STATICFILES_DIRS = [
-  os.path.join(BASE_DIR, 'assets')
-]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    BASE_DIR / 'static'
+
+]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT =BASE_DIR / 'assets'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+
+#production
+# STATIC_URL = '/static/'
+
+# STATICFILES_DIRS = [
+#   BASE_DIR / 'assets'
+# ]
+
+# STATIC_ROOT = BASE_DIR / 'static'
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR / 'media'
 
 
 
@@ -223,26 +188,15 @@ ACCOUNT_UNIQUE_EMAIL = True
 EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
 ANYMAIL = {
 
-    "RESEND_API_KEY": os.environ.get('RESEND_API_KEY'),
+    "RESEND_API_KEY": os.getenv('RESEND_API_KEY'),
 }
 # EMAIL_USE_SSL = False
 #
 DEFAULT_FROM_EMAIL = 'contact@ruthikegah.com'
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.AllowAny',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ]
-}
+
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-REST_AUTH_REGISTER_SERIALIZERS = {
-    'REGISTER_SERIALIZER': 'user.serializers.CustomRegisterSerializer',
-    "PASSWORD_RESET_SERIALIZER": "dj_rest_auth.serializers.PasswordResetSerializer",
-    "PASSWORD_RESET_CONFIRM_SERIALIZER": "dj_rest_auth.serializers.PasswordResetConfirmSerializer",
-}
+
 SITE_ID = 1

@@ -26,9 +26,7 @@ urlpatterns = [
          TemplateView.as_view(template_name="password_reset_confirm.html"),
          name='password_reset_confirm'),
         path('api/', include('portfolio.urls')),
-        path('accounts/', include('allauth.urls')),
-        path('rest-auth/', include('dj_rest_auth.urls')),
-        path('rest-auth/registration/', include('dj_rest_auth.registration.urls'))
+
 
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
