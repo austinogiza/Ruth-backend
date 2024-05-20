@@ -1,20 +1,20 @@
 import os
 from pathlib import Path
-import environ
+from dotenv import load_dotenv
 
-
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ruth.settings')
-env = environ.Env()
-environ.Env.read_env()
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
@@ -97,11 +97,11 @@ WSGI_APPLICATION = 'ruth.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': env('SUPABASE_HOST'),
+        'HOST': os.getenv('SUPABASE_HOST'),
         'NAME': 'postgres',
-        'USER': env('SUPABASE_USER'),
+        'USER': os.getenv('SUPABASE_USER'),
         'PORT': '5432',
-        'PASSWORD': env('SUPABASE_PASSWORD'),
+        'PASSWORD': os.getenv('SUPABASE_PASSWORD'),
     }
 }
 
@@ -189,7 +189,7 @@ ACCOUNT_UNIQUE_EMAIL = True
 EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
 ANYMAIL = {
 
-    "RESEND_API_KEY": env('RESEND_API_KEY'),
+    "RESEND_API_KEY": os.getenv('RESEND_API_KEY'),
 }
 # EMAIL_USE_SSL = False
 #
