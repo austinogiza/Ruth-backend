@@ -1,30 +1,31 @@
 import os
 from pathlib import Path
-from dotenv import load_dotenv
+import environ
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ruth.settings')
-load_dotenv()
+env = environ.Env()
+environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
 ## development
-ALLOWED_HOSTS = []
-DEBUG = True
+# ALLOWED_HOSTS = []
+# DEBUG = True
 
 ## production
-# DEBUG = False ## production
-# ALLOWED_HOSTS = ["www.api.ruthikegah.com", "api.ruthikegah.com"]
+DEBUG = False ## production
+ALLOWED_HOSTS = ["www.api.ruthikegah.com", "api.ruthikegah.com"]
 # Application definition
 
 INSTALLED_APPS = [
@@ -96,11 +97,11 @@ WSGI_APPLICATION = 'ruth.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'HOST': os.getenv('SUPABASE_HOST'),
+        'HOST': env('SUPABASE_HOST'),
         'NAME': 'postgres',
-        'USER': os.getenv('SUPABASE_USER'),
+        'USER': env('SUPABASE_USER'),
         'PORT': '5432',
-        'PASSWORD': os.getenv('SUPABASE_PASSWORD'),
+        'PASSWORD': env('SUPABASE_PASSWORD'),
     }
 }
 
@@ -141,30 +142,30 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 ##developments
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [
 
-    BASE_DIR / 'static'
+#     BASE_DIR / 'static'
 
-]
-STATIC_ROOT = BASE_DIR / "staticfiles"
-STATIC_ROOT =BASE_DIR / 'assets'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# ]
+# STATIC_ROOT = BASE_DIR / "staticfiles"
+# STATIC_ROOT =BASE_DIR / 'assets'
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR / 'media'
 
-CKEDITOR_UPLOAD_PATH = "uploads/"
+# CKEDITOR_UPLOAD_PATH = "uploads/"
 
 
 #production
-# STATIC_URL = '/static/'
+STATIC_URL = '/static/'
 
-# STATICFILES_DIRS = [
-#   BASE_DIR / 'assets'
-# ]
+STATICFILES_DIRS = [
+  BASE_DIR / 'assets'
+]
 
-# STATIC_ROOT = BASE_DIR / 'static'
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = BASE_DIR / 'media'
+STATIC_ROOT = BASE_DIR / 'static'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 
@@ -188,7 +189,7 @@ ACCOUNT_UNIQUE_EMAIL = True
 EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
 ANYMAIL = {
 
-    "RESEND_API_KEY": os.getenv('RESEND_API_KEY'),
+    "RESEND_API_KEY": env('RESEND_API_KEY'),
 }
 # EMAIL_USE_SSL = False
 #
