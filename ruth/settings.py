@@ -42,8 +42,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework',
     "anymail",
-    "django_tiptap",
-    'rest_framework.authtoken',
+
 
 ]
 
