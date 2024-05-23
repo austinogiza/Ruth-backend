@@ -92,12 +92,12 @@ WSGI_APPLICATION = 'ruth.wsgi.application'
 ## production
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'HOST':  os.getenv('DB_HOST'),
-        'NAME':os.getenv('DB_NAME'),
-        'USER':  os.getenv('DB_USER'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST':  os.getenv('SUPABASE_HOST'),
+        'NAME': 'postgres',
+        'USER':  os.getenv('SUPABASE_USER'),
         'PORT': '5432',
-        'PASSWORD':  os.getenv('DB_PASSWORD'),
+        'PASSWORD':  os.getenv('SUPABASE_PASSWORD'),
     }
 }
 
