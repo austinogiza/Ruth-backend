@@ -18,11 +18,11 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 ## development
 # ALLOWED_HOSTS = []
-# DEBUG = True
+DEBUG = True
 
 ## production
-DEBUG = False ## production
-ALLOWED_HOSTS = ["api.ruthikegah.com", "www.api.ruthikegah.com"]
+# DEBUG = False ## production
+ALLOWED_HOSTS = ["api.ruthikegah.com", "www.api.ruthikegah.com", "*"]
 # Application definition
 
 INSTALLED_APPS = [
@@ -100,7 +100,7 @@ DATABASES = {
         'PASSWORD':  os.getenv('SUPABASE_PASSWORD'),
     }
 }
-
+222
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
