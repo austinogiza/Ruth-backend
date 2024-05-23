@@ -90,14 +90,20 @@ WSGI_APPLICATION = 'ruth.wsgi.application'
 
 
 ## production
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'HOST':  os.getenv('SUPABASE_HOST'),
+#         'NAME': 'postgres',
+#         'USER':  os.getenv('SUPABASE_USER'),
+#         'PORT': '5432',
+#         'PASSWORD':  os.getenv('SUPABASE_PASSWORD'),
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'HOST':  os.getenv('SUPABASE_HOST'),
-        'NAME': 'postgres',
-        'USER':  os.getenv('SUPABASE_USER'),
-        'PORT': '5432',
-        'PASSWORD':  os.getenv('SUPABASE_PASSWORD'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
