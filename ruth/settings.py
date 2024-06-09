@@ -18,11 +18,11 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 ## development
 # ALLOWED_HOSTS = []
-DEBUG = True
+# DEBUG = True
 
 ## production
-# DEBUG = False ## production
-ALLOWED_HOSTS = ["api.ruthikegah.com", "www.api.ruthikegah.com", "*"]
+DEBUG = False ## production
+ALLOWED_HOSTS = ["api.ruthikegah.com", "www.api.ruthikegah.com",]
 # Application definition
 
 INSTALLED_APPS = [
@@ -191,8 +191,7 @@ ANYMAIL = {
 # EMAIL_USE_SSL = False
 #
 DEFAULT_FROM_EMAIL = 'contact@ruthikegah.com'
-
-
+SERVER_EMAIL = 'contact@ruthikegah.com'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
